@@ -120,6 +120,9 @@ function createBombs(totalCells) {
 // FUNCTION TO CHANGE THE BACKGROUND OF A CELL WHEN CLICKED
 function listenForSelection(cellsInTheGrid, bombsArray, score) {
 
+  // CREATE A VARIABLE TO CHECK IF A BOMB WAS FOUND
+  let bombFound = false;
+
   // ADDS A "CLICK" EVENT LISTENER TO EVERY CELL IN THE GRID
   for (let i = 0; i < cellsInTheGrid.length; i++) {
     const currentCell = cellsInTheGrid[i];
@@ -129,9 +132,15 @@ function listenForSelection(cellsInTheGrid, bombsArray, score) {
       if (this.className.includes("selected")) {
         return;
       } else if (bombsArray.includes(Number(this.innerText))) {
-        alert(`HAI PERSO. IL TUO PUNTEGGIO E' ${score}`);
-        location.reload();
-      } else {
+        this.style.backgroundColor = "red";
+        bombFound = true;
+        setTimeout(() => {
+          alert(`HAI PERSO. IL TUO PUNTEGGIO E' ${score}`);
+          location.reload();
+        }, 500);
+      } 
+      // IF A BOMB IS FOUND SCORE WON'T GROW IF YOU CLICK ON ANOTHER CELL IN THE 500MS OF TIME BEFORE THE ALERT APPEARS
+      else if (bombFound != true) {
         this.classList.add("selected");
         console.log(Number(this.innerText));
         score++;
