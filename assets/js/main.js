@@ -138,12 +138,17 @@ function listenForSelection(cellsInTheGrid, bombsArray, score) {
           alert(`HAI PERSO. IL TUO PUNTEGGIO E' ${score}`);
           location.reload();
         }, 500);
-      } 
+      }
+
       // IF A BOMB IS FOUND SCORE WON'T GROW IF YOU CLICK ON ANOTHER CELL IN THE 500MS OF TIME BEFORE THE ALERT APPEARS
       else if (bombFound != true) {
         this.classList.add("selected");
         console.log(Number(this.innerText));
         score++;
+        if (score == cellsInTheGrid.length - 16) {
+          alert(`HAI VINTO! IL TUO PUNTEGGIO E' ${score}`);
+          location.reload();
+        }
       }
     });
   }
