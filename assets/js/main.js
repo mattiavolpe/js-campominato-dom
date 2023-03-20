@@ -124,6 +124,8 @@ function listenForSelection(cellsInTheGrid, bombsArray, score) {
   for (let i = 0; i < cellsInTheGrid.length; i++) {
     const currentCell = cellsInTheGrid[i];
     currentCell.addEventListener("click", function() {
+
+      // IF CELL IS ALREADY SELECTED, NOTHING HAPPENS AND SCORE DOESN'T INCREASE, ELSE IF IT'S A BOMB YOU LOOSE, ELSE ADD THE SELECTED CLASS AND INCREASE THE SCORE
       if (this.className.includes("selected")) {
         return;
       } else if (bombsArray.includes(Number(this.innerText))) {
